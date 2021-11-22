@@ -1,6 +1,7 @@
 package com.metanit;
 
 import java.util.InputMismatchException;
+import java.util.Objects;
 import java.util.Scanner;
 
 class RomanArabianCalc {
@@ -50,29 +51,28 @@ class RomanArabianCalc {
         } catch (Throwable e) {
             type2 = "РИМ";
         }
-        if (!type1.equals(type2)) {
-            throw new InputMismatchException("Арабские и римские числа не совместимы");
-        }
+
         number1 = romanToNumber(stable00);
         number2 = romanToNumber(stable01);
 
         if (number1 > 10 || number2 > 10) {
             throw new InputMismatchException("Неверное значение числа");
         }
-        try {
-            number1 = Integer.parseInt(stable00);
-            number2 = Integer.parseInt(stable01);
+
+        if (type1.equals("АРАБ") && type2.equals("АРАБ")) {
             result = calculated(number1, number2, operation);
             System.out.println("--Результат для арабских цифр----");
             System.out.println(number1 + " " + operation + " " + number2 + " = " + result);
-        } catch (Throwable e) {
+        } else if (type1.equals("РИМ") && type2.equals("РИМ")) {
             result = calculated(number1, number2, operation);
             if (result == 0) {
                 throw new InputMismatchException("Нуля нет в римских цифрах");
             }
-            String resultRoman = convertNumToRoman(result);
+            String resultRoman = convertNumToRoman(result-1);
             System.out.println("---Результат для римских цифр----");
             System.out.println(stable00 + " " + operation + " " + stable01 + " = " + resultRoman);
+        } else {
+            throw new InputMismatchException("Арабские и римские числа не совместимы");
         }
     }
 

@@ -1,7 +1,6 @@
 package com.metanit;
 
 import java.util.InputMismatchException;
-import java.util.Objects;
 import java.util.Scanner;
 
 class RomanArabianCalc {
